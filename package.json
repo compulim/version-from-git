@@ -26,7 +26,7 @@
     "bump",
     "commit",
     "git",
-    "version",
+    "version"
   ],
   "license": "MIT",
   "dependencies": {
