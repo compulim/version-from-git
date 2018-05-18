@@ -11,7 +11,7 @@
   },
   "author": "William Wong <compulim@hotmail.com> (http://compulim.info/)",
   "files": [
-    "lib/**/*"
+    "src/**/*"
   ],
   "license": "MIT",
   "dependencies": {
