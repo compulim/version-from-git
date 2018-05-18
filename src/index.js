@@ -64,7 +64,7 @@ function main() {
 
   const { version } = packageJSON;
 
-  const nextVersion = `${ major(version) }.${ minor(version) }.${ patch(version) }-${ branch }+${ short }`;
+  const nextVersion = `${ major(version) }.${ minor(version) }.${ patch(version) }-${ branch }.${ short }`;
 
   log(`Bumping from ${ green(version) } to ${ green(nextVersion) }`);
 

@@ -8,6 +8,8 @@ We want to use `npm version` to bump to a customized version that contains both 
 
 And use Travis CI to automatically publish the prerelease version to NPM, tagged using [`npm dist-tag`](https://docs.npmjs.com/cli/dist-tag).
 
+> Instead of using plus (+) to denote build information, we prefer period (.) for simpler escapes.
+
 # How to use
 
 Run `npx version-from-git`, it will run `npm version 1.0.0-master+1a2b3c4`.
@@ -15,7 +17,7 @@ Run `npx version-from-git`, it will run `npm version 1.0.0-master+1a2b3c4`.
 ```
   Usage: version-from-git [options]
 
-  Bump package.json version to pre-release tagged with Git branch and short commit hash, 1.0.0-master+1a2b3c4
+  Bump package.json version to pre-release tagged with Git branch and short commit hash, 1.0.0-master.1a2b3c4
 
   Options:
 
