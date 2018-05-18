@@ -13,6 +13,13 @@
   "files": [
     "src/**/*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/compulim/version-from-git.git"
+  },
+  "bugs": {
+    "url": "https://github.com/compulim/version-from-git/issues"
+  },
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.1",
