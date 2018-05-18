@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const { branch: gitBranch, short: gitShort } = require('git-rev-sync');
 const { join, resolve } = require('path');
 const { major, minor, patch } = require('semver');
