@@ -4,7 +4,7 @@
   "description": "Bump package.json version to pre-release tagged with Git branch and short commit hash, 1.0.0-master.1a2b3c4",
   "main": "src/index.js",
   "bin": {
-    "version-from-git": "./src/index"
+    "version-from-git": "./src/index.js"
   },
   "scripts": {
     "test": "echo \"TODO: Add tests\""
