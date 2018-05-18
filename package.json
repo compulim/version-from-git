@@ -20,6 +20,7 @@
   "bugs": {
     "url": "https://github.com/compulim/version-from-git/issues"
   },
+  "homepage": "https://github.com/compulim/version-from-git#readme",
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.1",
