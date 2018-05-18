@@ -25,7 +25,7 @@ program
 function main() {
   log(`Running ${ green(`${ ourPackageJSON.name }@${ ourPackageJSON.version }`) }`);
 
-  let branch;
+  let branch, short;
 
   if (program.travis) {
     log(`Travis mode ${ magenta('enabled') }`);
@@ -62,7 +62,6 @@ function main() {
   }
 
   const { version } = packageJSON;
-  let branch, short;
 
   const nextVersion = `${ major(version) }.${ minor(version) }.${ patch(version) }-${ branch }+${ short }`;
 
