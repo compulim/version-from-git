@@ -1,0 +1,25 @@
+{
+  "name": "version-from-git",
+  "version": "1.0.0-0",
+  "description": "Bump package.json version to pre-release tagged with Git branch and short commit hash, 1.0.0-master+1a2b3c4",
+  "main": "src/index.js",
+  "bin": {
+    "version-from-git": "./src/index"
+  },
+  "scripts": {
+    "test": "echo \"TODO: Add tests\""
+  },
+  "author": "William Wong <compulim@hotmail.com> (http://compulim.info/)",
+  "files": [
+    "lib/**/*"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "commander": "^2.15.1",
+    "cross-spawn": "^6.0.5",
+    "git-rev-sync": "^1.12.0",
+    "on-error-resume-next": "^1.0.0",
+    "semver": "^5.5.0"
+  }
+}
