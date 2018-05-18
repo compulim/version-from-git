@@ -21,6 +21,13 @@
     "url": "https://github.com/compulim/version-from-git/issues"
   },
   "homepage": "https://github.com/compulim/version-from-git#readme",
+  "keywords": [
+    "branch",
+    "bump",
+    "commit",
+    "git",
+    "version",
+  ],
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.1",
