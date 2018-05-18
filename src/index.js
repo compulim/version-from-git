@@ -25,12 +25,24 @@ program
 function main() {
   log(`Running ${ green(`${ ourPackageJSON.name }@${ ourPackageJSON.version }`) }`);
 
+  let branch;
+
   if (program.travis) {
     log(`Travis mode ${ magenta('enabled') }`);
 
     if (process.env.TRAVIS_TAG) {
       return log(yellow('Environment variable TRAVIS_TAG is present, we will not generate a new version, exiting'));
     }
+
+    branch = process.env.TRAVIS_BRANCH;
+  }
+
+  try {
+    branch = branch || gitBranch(cwd);
+    short = gitShort(cwd);
+  } catch (err) {
+    log(red('Failed to read from .git directory, is this a Git branch with at least one commit?'));
+    process.exit(-1);
   }
 
   if (program.path) {
@@ -51,14 +63,6 @@ function main() {
 
   const { version } = packageJSON;
   let branch, short;
-
-  try {
-    branch = gitBranch(cwd);
-    short = gitShort(cwd);
-  } catch (err) {
-    log(red('Failed to read from .git directory, is this a Git branch with at least one commit?'));
-    process.exit(-1);
-  }
 
   const nextVersion = `${ major(version) }.${ minor(version) }.${ patch(version) }-${ branch }+${ short }`;
 
