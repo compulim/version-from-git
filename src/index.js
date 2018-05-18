@@ -37,6 +37,12 @@ function main() {
     branch = process.env.TRAVIS_BRANCH;
   }
 
+  if (program.path) {
+    process.chdir(resolve(program.path));
+  }
+
+  const cwd = process.cwd();
+
   try {
     branch = branch || gitBranch(cwd);
     short = gitShort(cwd);
@@ -45,11 +51,6 @@ function main() {
     process.exit(-1);
   }
 
-  if (program.path) {
-    process.chdir(resolve(program.path));
-  }
-
-  const cwd = process.cwd();
   const packageJSONPath = resolve('package.json');
 
   log(`Reading from ${ magenta(packageJSONPath) }`);
