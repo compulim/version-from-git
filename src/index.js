@@ -53,6 +53,9 @@ function main() {
     process.exit(-1);
   }
 
+  // branches often contain chars such as _ which is not valid semver
+  branch = branch.replace(/(_|-|\[|\]|\\|\/)/g,"");
+
   const packageJSONPath = resolve('package.json');
 
   log(`Reading from ${ magenta(packageJSONPath) }`);
