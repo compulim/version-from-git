@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { branch: gitBranch, short: gitShort } = require('git-rev-sync');
+const { branch: gitBranch, short: gitShort, long: gitLong } = require('git-rev-sync');
 const { join, resolve } = require('path');
 const { major, minor, patch } = require('semver');
 const { green, magenta, red, yellow } = require('chalk');
@@ -11,10 +11,13 @@ const spawn = require('cross-spawn');
 const { log } = console;
 const ourPackageJSON = require(join(__dirname, '../package.json'));
 
+const DEFAULT_PATTERN = 'branch.short';
+
 program
   .version(ourPackageJSON.version)
   .description(ourPackageJSON.description)
   .option('-p, --path <path>', 'path to package.json, default to current directory', process.cwd())
+  .option('--pattern <pattern>', 'pre-release version pattern', DEFAULT_PATTERN)
   .option('-t, --travis', 'run in Travis CI: skip when TRAVIS_TAG present')
   .option('-f, --force', 'run "npm version" with --force')
   .option('-m, --message <message>', 'run "npm version" with --message')
@@ -27,7 +30,7 @@ program
 function main() {
   log(`Running ${ green(`${ ourPackageJSON.name }@${ ourPackageJSON.version }`) }`);
 
-  let branch, short;
+  let branch, long, short;
 
   if (program.travis) {
     log(`Travis mode ${ magenta('enabled') }`);
@@ -47,6 +50,7 @@ function main() {
 
   try {
     branch = branch || gitBranch(cwd);
+    long = gitLong(cwd);
     short = gitShort(cwd);
   } catch (err) {
     log(red('Failed to read from .git directory, is this a Git branch with at least one commit?'));
@@ -65,8 +69,18 @@ function main() {
   }
 
   const { version } = packageJSON;
+  const { pattern = DEFAULT_PATTERN } = program;
+  const preRelease = pattern.replace(/\w+/giu, name => {
+    switch (name) {
+      case 'branch': return branch;
+      case 'short': return short;
+      case 'long': return long;
 
-  const nextVersion = `${ major(version) }.${ minor(version) }.${ patch(version) }-${ branch }.${ short }`;
+      default: return name;
+    }
+  });
+
+  const nextVersion = `${ major(version) }.${ minor(version) }.${ patch(version) }-${ preRelease }`;
 
   log(`Bumping from ${ green(version) } to ${ green(nextVersion) }`);
 
