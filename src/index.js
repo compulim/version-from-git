@@ -11,13 +11,13 @@ const spawn = require('cross-spawn');
 const { log } = console;
 const ourPackageJSON = require(join(__dirname, '../package.json'));
 
-const DEFAULT_PATTERN = 'branch.short';
+const DEFAULT_TEMPLATE = 'branch.short';
 
 program
   .version(ourPackageJSON.version)
   .description(ourPackageJSON.description)
   .option('-p, --path <path>', 'path to package.json, default to current directory', process.cwd())
-  .option('--pattern <pattern>', 'pre-release version pattern', DEFAULT_PATTERN)
+  .option('--template <template>', 'pre-release version template', DEFAULT_TEMPLATE)
   .option('-t, --travis', 'run in Travis CI: skip when TRAVIS_TAG present')
   .option('-f, --force', 'run "npm version" with --force')
   .option('-m, --message <message>', 'run "npm version" with --message')
@@ -69,8 +69,7 @@ function main() {
   }
 
   const { version } = packageJSON;
-  const { pattern = DEFAULT_PATTERN } = program;
-  const preRelease = pattern.replace(/\w+/giu, name => {
+  const preRelease = (program.template || DEFAULT_TEMPLATE).replace(/\w+/giu, name => {
     switch (name) {
       case 'branch': return branch;
       case 'short': return short;
@@ -97,9 +96,9 @@ function main() {
 
   log(`Running ${ magenta(`npm ${ args.join(' ') }`) }`);
 
-  const result = spawn.sync('npm', args, { cwd, stdio: 'inherit' });
+  // const result = spawn.sync('npm', args, { cwd, stdio: 'inherit' });
 
-  process.exit(result);
+  // process.exit(result);
 }
 
 main();
