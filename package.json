@@ -24,8 +24,10 @@
   "keywords": [
     "branch",
     "bump",
+    "ci",
     "commit",
     "git",
+    "travis",
     "version"
   ],
   "license": "MIT",

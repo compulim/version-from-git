@@ -6,13 +6,13 @@
 
 We want to use `npm version` to bump to a customized version that contains both Git branch and commit hash.
 
-And use Travis CI to automatically publish the prerelease version to NPM, tagged using [`npm dist-tag`](https://docs.npmjs.com/cli/dist-tag).
+And use Travis CI to automatically publish the pre-release version to NPM, tagged using [`npm dist-tag`](https://docs.npmjs.com/cli/dist-tag).
 
-> Instead of using plus (+) to denote build information, we prefer period (.) for simpler escapes.
+> Instead of using plus (+) to denote build information, we prefer period (.) for simpler escapes. If you prefer the plus sign, you can [customize the pre-release version pattern](#customizing-pre-release-version-pattern).
 
 # How to use
 
-Run `npx version-from-git`, it will run `npm version 1.0.0-master+1a2b3c4`.
+Run `npx version-from-git`, it will run `npm version 1.0.0-master.1a2b3c4`.
 
 ```
   Usage: version-from-git [options]
@@ -38,6 +38,18 @@ Run `npx version-from-git`, it will run `npm version 1.0.0-master+1a2b3c4`.
 In Travis, when you push a tag (probably by `npm version 1.0.0` followed by `git push origin v1.0.0`), you may want to skip `version-from-git` from generating a pre-release tag.
 
 Run `npx version-from-git -t`, it will detect whether `TRAVIS_TAG` environment variable is present and skip.
+
+## Customizing pre-release version pattern
+
+You can customize the version pattern when tagging for pre-release versions.
+
+| Pattern name | Description                                                      | Sample                                     |
+|--------------|------------------------------------------------------------------|--------------------------------------------|
+| `branch`     | Branch name<br />In Travis, will use `process.env.TRAVIS_BRANCH` | `master`                                   |
+| `long`       | Git commit in long form                                          | `3807f9004867438c57a3e26f2073c33c458d4ef9` |
+| `short`      | Git commit in short form                                         | `3807f90`                                  |
+
+Default pattern is `branch.short`, which would produce `master.1a2b3c4`.
 
 # Contributions
 
