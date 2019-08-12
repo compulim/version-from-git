@@ -23,6 +23,7 @@ Run `npx version-from-git`, it will run `npm version 1.0.0-master.1a2b3c4`.
 
     -V, --version            output the version number
     -p, --path <path>        path to package.json, default to current directory (default: C:\Users\Compulim\Source\Repos\version-from-git)
+    --template <template>    pre-release version template (default: branch.short)
     -t, --travis             run in Travis CI: skip when TRAVIS_TAG present
     -f, --force              run "npm version" with --force
     -m, --message <message>  run "npm version" with --message
@@ -41,7 +42,7 @@ Run `npx version-from-git -t`, it will detect whether `TRAVIS_TAG` environment v
 
 ## Customizing pre-release version pattern
 
-You can customize the version pattern when tagging for pre-release versions.
+You can customize the version pattern when tagging for pre-release versions by running with argument `--template branch.short`.
 
 | Pattern name | Description                                                      | Sample                                     |
 |--------------|------------------------------------------------------------------|--------------------------------------------|
