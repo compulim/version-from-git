@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ### Added
-- Fix [#2](https://github.com/compulim/version-from-git/issues/2). Supports customizing pre-release, in [PR #3](https://github.com/compulim/version-from-git/pulls/3)
+- Fix [#2](https://github.com/compulim/version-from-git/issues/2). Supports customizing pre-release thru `--template`, in [PR #3](https://github.com/compulim/version-from-git/pulls/3)
 
 ## [1.0.0] - 2018-05-18
 ### Added
