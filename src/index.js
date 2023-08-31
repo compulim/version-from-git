@@ -98,7 +98,7 @@ function main() {
 
   const result = spawn.sync('npm', args, { cwd, stdio: 'inherit' });
 
-  process.exit(result);
+  process.exit(result.status);
 }
 
 main();
