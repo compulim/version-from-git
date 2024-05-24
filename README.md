@@ -1,6 +1,6 @@
 # version-from-git
 
-[![npm version](https://badge.fury.io/js/version-from-git.svg)](https://badge.fury.io/js/version-from-git) [![Build Status](https://travis-ci.org/compulim/version-from-git.svg?branch=master)](https://travis-ci.org/compulim/version-from-git)
+[![npm version](https://badge.fury.io/js/version-from-git.svg)](https://badge.fury.io/js/version-from-git)
 
 # Background
 
@@ -12,12 +12,12 @@ And use Travis CI to automatically publish the pre-release version to NPM, tagge
 
 # How to use
 
-Run `npx version-from-git`, it will run `npm version 1.0.0-master.1a2b3c4`.
+Run `npx version-from-git`, it will run `npm version 1.0.0-main.1a2b3c4`.
 
 ```
   Usage: version-from-git [options]
 
-  Bump package.json version to pre-release tagged with Git branch and short commit hash, 1.0.0-master.1a2b3c4
+  Bump package.json version to pre-release tagged with Git branch and short commit hash, 1.0.0-main.1a2b3c4
 
   Options:
 
@@ -45,12 +45,12 @@ Run `npx version-from-git -t`, it will detect whether `TRAVIS_TAG` environment v
 You can customize the version pattern when tagging for pre-release versions by running with argument `--template branch.short`.
 
 | Pattern name | Description                                                      | Sample                                     |
-|--------------|------------------------------------------------------------------|--------------------------------------------|
-| `branch`     | Branch name<br />In Travis, will use `process.env.TRAVIS_BRANCH` | `master`                                   |
+| ------------ | ---------------------------------------------------------------- | ------------------------------------------ |
+| `branch`     | Branch name<br />In Travis, will use `process.env.TRAVIS_BRANCH` | `main`                                     |
 | `long`       | Git commit in long form                                          | `3807f9004867438c57a3e26f2073c33c458d4ef9` |
 | `short`      | Git commit in short form                                         | `3807f90`                                  |
 
-Default pattern is `branch.short`, which would produce `master.1a2b3c4`.
+Default pattern is `branch.short`, which would produce `main.1a2b3c4`.
 
 # Contributions
 
