@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-- Resolves [#16](https://github.com/compulim/version-from-git/issues/16). Fixes for Node.js 20, in PR [#XXX](https://github.com/compulim/version-from-git/pulls/XXX0
+- Resolves [#16](https://github.com/compulim/version-from-git/issues/16). Fixes for Node.js 20, in PR [#18](https://github.com/compulim/version-from-git/pulls/18)
 
 ## [1.1.1] - 2019-08-12
 
