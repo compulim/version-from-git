@@ -3,13 +3,32 @@
   "version": "0.0.0-0",
   "description": "Bump package.json version to pre-release tagged with Git branch and short commit hash, 1.0.0-master.1a2b3c4",
   "files": [
-    "./src./"
+    "./src/"
   ],
   "main": "./src/index.js",
   "bin": {
     "version-from-git": "./src/index.js"
   },
   "scripts": {
+    "build": "npm run build:babel:commonjs && npm run build:babel:esmodules && npm run build:typescript:commonjs && npm run build:typescript:esmodules",
+    "build:babel:commonjs": "babel src --config-file ./babel.commonjs.config.json --extensions .ts,.tsx --out-dir ./lib/commonjs/",
+    "build:babel:esmodules": "babel src --config-file ./babel.esmodules.config.json --extensions .ts,.tsx --out-dir ./lib/esmodules/",
+    "build:typescript:commonjs": "tsc --project ./src/tsconfig.declaration.commonjs.json",
+    "build:typescript:esmodules": "tsc --project ./src/tsconfig.declaration.esmodules.json",
+    "bump": "npm run bump:prod && npm run bump:dev && npm run bump:auditfix && npm run bump:babel",
+    "bump:auditfix": "npm audit fix || exit 0",
+    "bump:babel": "npm run bump:babel:commonjs && npm run bump:babel:esmodules",
+    "bump:babel:commonjs": "cat babel.commonjs.config.json | jq --arg CORE_JS_VERSION `[ -f node_modules/@babel/runtime-corejs3/package.json ] && cat node_modules/@babel/runtime-corejs3/package.json | jq -r .version || cat ../../node_modules/@babel/runtime-corejs3/package.json | jq -r .version` '(.plugins[] | select(.[0] == \"@babel/plugin-transform-runtime\"))[1].version = $CORE_JS_VERSION' | prettier --parser json > babel.commonjs.config.json.tmp && mv babel.commonjs.config.json.tmp babel.commonjs.config.json",
+    "bump:babel:esmodules": "cat babel.esmodules.config.json | jq --arg CORE_JS_VERSION `[ -f node_modules/@babel/runtime-corejs3/package.json ] && cat node_modules/@babel/runtime-corejs3/package.json | jq -r .version || cat ../../node_modules/@babel/runtime-corejs3/package.json | jq -r .version` '(.plugins[] | select(.[0] == \"@babel/plugin-transform-runtime\"))[1].version = $CORE_JS_VERSION' | prettier --parser json > babel.esmodules.config.json.tmp && mv babel.esmodules.config.json.tmp babel.esmodules.config.json",
+    "bump:dev": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.localPeerDependencies // {}) as $L | (.devDependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@latest\") | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
+    "bump:prod": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.localPeerDependencies // {}) as $L | (.dependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@latest\") | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
+    "postscaffold": "npm run bump:babel",
+    "precommit": "npm run precommit:eslint && npm run precommit:typescript:production && npm run precommit:typescript:test",
+    "precommit:eslint": "eslint ./src/",
+    "precommit:typescript:production": "tsc --noEmit --project ./src/tsconfig.precommit.production.json",
+    "precommit:typescript:test": "tsc --noEmit --project ./src/tsconfig.precommit.test.json",
+    "prepack": "cp ../../CHANGELOG.md . && cp ../../LICENSE . && cp ../../README.md .",
+    "switch": "cat package.json | jq --arg SWITCH_NAME $SWITCH_NAME -r '(.[\"switch:\" + $SWITCH_NAME] // {}) as $TEMPLATE | .devDependencies += ($TEMPLATE.devDependencies // {}) | .dependencies += ($TEMPLATE.dependencies // {})' | tee ./package.json.tmp && mv ./package.json.tmp ./package.json",
     "test": "echo \"TODO: Add tests\""
   },
   "repository": {
