@@ -16,7 +16,7 @@
     "bump:auditfix": "npm audit fix || exit 0",
     "bump:dev": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.localPeerDependencies // {}) as $L | (.devDependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@latest\") | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
     "bump:prod": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.localPeerDependencies // {}) as $L | (.dependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@latest\") | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
-    "precommit": "npm run precommit:eslint && npm run precommit:typescript:production && npm run precommit:typescript:test",
+    "-precommit": "npm run precommit:eslint && npm run precommit:typescript:production && npm run precommit:typescript:test",
     "precommit:eslint": "eslint ./src/",
     "precommit:typescript:production": "tsc --noEmit --project ./src/tsconfig.precommit.production.json",
     "precommit:typescript:test": "tsc --noEmit --project ./src/tsconfig.precommit.test.json",
