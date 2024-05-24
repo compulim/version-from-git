@@ -50,5 +50,8 @@
     "git-rev-sync": "^3.0.2",
     "on-error-resume-next": "^1.0.0",
     "semver": "^5.5.0"
+  },
+  "devDependencies": {
+    "@tsconfig/strictest": "^2.0.5"
   }
 }
