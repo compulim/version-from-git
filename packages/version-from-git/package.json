@@ -1,0 +1,57 @@
+{
+  "name": "version-from-git",
+  "version": "0.0.0-0",
+  "description": "Bump package.json version to pre-release tagged with Git branch and short commit hash, 1.0.0-main.1a2b3c4",
+  "files": [
+    "./src/**/*.cjs",
+    "./src/**/*.js",
+    "./src/**/*.mjs"
+  ],
+  "main": "./src/index.js",
+  "bin": {
+    "version-from-git": "./src/index.js"
+  },
+  "scripts": {
+    "bump": "npm run bump:prod && npm run bump:dev && npm run bump:auditfix",
+    "bump:auditfix": "npm audit fix || exit 0",
+    "bump:dev": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.localPeerDependencies // {}) as $L | (.devDependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@latest\") | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
+    "bump:prod": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.localPeerDependencies // {}) as $L | (.dependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@latest\") | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
+    "-precommit": "npm run precommit:eslint && npm run precommit:typescript:production && npm run precommit:typescript:test",
+    "precommit:eslint": "eslint ./src/",
+    "precommit:typescript:production": "tsc --noEmit --project ./src/tsconfig.precommit.production.json",
+    "precommit:typescript:test": "tsc --noEmit --project ./src/tsconfig.precommit.test.json",
+    "prepack": "cp ../../CHANGELOG.md . && cp ../../LICENSE . && cp ../../README.md .",
+    "switch": "cat package.json | jq --arg SWITCH_NAME $SWITCH_NAME -r '(.[\"switch:\" + $SWITCH_NAME] // {}) as $TEMPLATE | .devDependencies += ($TEMPLATE.devDependencies // {}) | .dependencies += ($TEMPLATE.dependencies // {})' | tee ./package.json.tmp && mv ./package.json.tmp ./package.json",
+    "test": "echo \"TODO: Add tests\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/compulim/version-from-git.git"
+  },
+  "keywords": [
+    "branch",
+    "bump",
+    "ci",
+    "commit",
+    "git",
+    "travis",
+    "version"
+  ],
+  "author": "William Wong (https://github.com/compulim)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/compulim/version-from-git/issues"
+  },
+  "homepage": "https://github.com/compulim/version-from-git#readme",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "commander": "^2.15.1",
+    "cross-spawn": "^6.0.5",
+    "git-rev-sync": "^3.0.2",
+    "on-error-resume-next": "^1.0.0",
+    "semver": "^5.5.0"
+  },
+  "devDependencies": {
+    "@tsconfig/strictest": "^2.0.5"
+  }
+}

@@ -1,0 +1,44 @@
+env:
+  node: true
+extends:
+  - eslint:recommended
+overrides:
+  - extends: .eslintrc.react.yml
+    files:
+      - '**/*.jsx'
+      - '**/*.tsx'
+  - extends: .eslintrc.typescript.yml
+    files:
+      - '**/*.mts'
+      - '**/*.ts'
+      - '**/*.tsx'
+  - extends: .eslintrc.jest.yml
+    files:
+      - '**/__tests__/**'
+      - '**/*.spec.cjs'
+      - '**/*.spec.mjs'
+      - '**/*.spec.js'
+      - '**/*.spec.jsx'
+      - '**/*.spec.cts'
+      - '**/*.spec.mts'
+      - '**/*.spec.ts'
+      - '**/*.spec.tsx'
+      - '**/*.test.cjs'
+      - '**/*.test.mjs'
+      - '**/*.test.js'
+      - '**/*.test.jsx'
+      - '**/*.test.cts'
+      - '**/*.test.mts'
+      - '**/*.test.ts'
+      - '**/*.test.tsx'
+parserOptions:
+  ecmaVersion: latest
+  sourceType: module
+plugins:
+  - prettier
+root: true
+rules:
+  prettier/prettier: error
+  no-empty:
+    - error
+    - allowEmptyCatch: true
