@@ -13,6 +13,7 @@ jobs:
         switch: [current]
     uses: compulim/workflows/.github/workflows/pull-request-validation.yml@main
     with:
+      github-pages: false
       node-version: ${{ matrix.node-version }}
       package-name: version-from-git
       skip-integration-test: true

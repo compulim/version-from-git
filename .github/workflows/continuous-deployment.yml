@@ -17,4 +17,5 @@ jobs:
     secrets: inherit
     uses: compulim/workflows/.github/workflows/continuous-deployment.yml@main
     with:
+      github-pages: false
       package-name: version-from-git
