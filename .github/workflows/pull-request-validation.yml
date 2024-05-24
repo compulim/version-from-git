@@ -1,0 +1,19 @@
+name: Pull request validation
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  call-workflow:
+    strategy:
+      matrix:
+        node-version: [20.x]
+        switch: [current]
+    uses: compulim/workflows/.github/workflows/pull-request-validation.yml@main
+    with:
+      node-version: ${{ matrix.node-version }}
+      package-name: version-from-git
+      skip-integration-test: true
+      switch: ${{ matrix.switch }}

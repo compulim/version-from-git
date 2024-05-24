@@ -1,0 +1,58 @@
+name: Bug report
+description: Use this template to report a bug.
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We run this project out of our spare time and may not monitor this repository every day. Our support capacity is very limited.
+
+        Developers in professional capacity will receive prioritized support.
+  - type: dropdown
+    attributes:
+      label: Version
+      description: |
+        Please verify the issue on latest versions. Support on non-latest version is minimal and on a per case basis.
+
+        If you are using latest production, please verify against our latest development version as the issue could have been resolved recently. To install latest development version, run `npm install iter-fest@main`.
+
+      multiple: true
+      options:
+        - Latest production (@latest)
+        - Latest development (@main)
+        - Not latest
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Test case
+      description: |
+        Please write a minimal test case which fail the scenario with comments in [BDD format (given/when/then)](https://www.thoughtworks.com/insights/blog/applying-bdd-acceptance-criteria-user-stories).
+
+        To protect from regressions, once the issue is resolved, your test case will be added to [our test suite](../tree/main/packages/integration-test/).
+
+        For your convenience, a basic test case is provided below. For advanced scenarios, please look at [our test suite](../tree/main/packages/integration-test/).
+
+        *Support will be slow or denied if a test case is not provided.*
+      render: sh
+      value:
+  - type: input
+    attributes:
+      label: Coding sandbox URL
+      description: |
+        If you have a minimal repro in a coding sandbox, please provide a URL here. Please prepare it from scratch. We cannot work directly on your app source code.
+      placeholder: 'https://'
+  - type: textarea
+    attributes:
+      label: Console errors
+      description: Please copy any related errors printed to the console here.
+      render: js
+  - type: textarea
+    attributes:
+      label: Screenshots
+      description: Please remove or obscure any personally identifiable information from your screenshots or recordings.
+  - type: textarea
+    attributes:
+      label: Additional context
+      description: If any of the answers is "others or unrelated", please explain it here.

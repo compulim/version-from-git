@@ -28,12 +28,12 @@ program
   .parse(process.argv);
 
 function main() {
-  log(`Running ${ green(`${ ourPackageJSON.name }@${ ourPackageJSON.version }`) }`);
+  log(`Running ${green(`${ourPackageJSON.name}@${ourPackageJSON.version}`)}`);
 
   let branch, long, short;
 
   if (program.travis) {
-    log(`Travis mode ${ magenta('enabled') }`);
+    log(`Travis mode ${magenta('enabled')}`);
 
     if (process.env.TRAVIS_TAG) {
       return log(yellow('Environment variable TRAVIS_TAG is present, we will not generate a new version, exiting'));
@@ -59,7 +59,7 @@ function main() {
 
   const packageJSONPath = resolve('package.json');
 
-  log(`Reading from ${ magenta(packageJSONPath) }`);
+  log(`Reading from ${magenta(packageJSONPath)}`);
 
   const packageJSON = onErrorResumeNext(() => require(packageJSONPath));
 
@@ -71,34 +71,36 @@ function main() {
   const { version } = packageJSON;
   const preRelease = (program.template || DEFAULT_TEMPLATE).replace(/\w+/giu, name => {
     switch (name) {
-      case 'branch': return branch;
-      case 'short': return short;
-      case 'long': return long;
+      case 'branch':
+        return branch;
+      case 'short':
+        return short;
+      case 'long':
+        return long;
 
-      default: return name;
+      default:
+        return name;
     }
   });
 
-  const nextVersion = `${ major(version) }.${ minor(version) }.${ patch(version) }-${ preRelease }`;
+  const nextVersion = `${major(version)}.${minor(version)}.${patch(version)}-${preRelease}`;
 
-  log(`Bumping from ${ green(version) } to ${ green(nextVersion) }`);
+  log(`Bumping from ${green(version)} to ${green(nextVersion)}`);
 
   const args = [
     'version',
-    ...program.allowSameVersion ? ['--allow-same-version'] : [],
-    ...program.commitHooks ? [] : ['--no-commit-hooks'],
-    ...program.force ? ['--force'] : [],
-    ...program.gitTagVersion ? [] : ['--no-git-tag-version'],
-    ...program.message ? ['--message', program.message] : [],
-    ...program.signGitTag ? ['--sign-git-tag'] : [],
+    ...(program.allowSameVersion ? ['--allow-same-version'] : []),
+    ...(program.commitHooks ? [] : ['--no-commit-hooks']),
+    ...(program.force ? ['--force'] : []),
+    ...(program.gitTagVersion ? [] : ['--no-git-tag-version']),
+    ...(program.message ? ['--message', program.message] : []),
+    ...(program.signGitTag ? ['--sign-git-tag'] : []),
     nextVersion
   ];
 
-  log(`Running ${ magenta(`npm ${ args.join(' ') }`) }`);
+  log(`Running ${magenta(`npm ${args.join(' ')}`)}`);
 
-  const result = spawn.sync('npm', args, { cwd, stdio: 'inherit' });
-
-  process.exit(result);
+  spawn.sync('npm', args, { cwd, stdio: 'inherit' });
 }
 
 main();
