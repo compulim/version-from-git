@@ -100,7 +100,9 @@ function main() {
 
   log(`Running ${magenta(`npm ${args.join(' ')}`)}`);
 
-  spawn.sync('npm', args, { cwd, stdio: 'inherit' });
+  const result = spawn.sync('npm', args, { cwd, stdio: 'inherit' });
+
+  process.exit(result.status);
 }
 
 main();
