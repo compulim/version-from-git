@@ -14,5 +14,6 @@ jobs:
     with:
       github-pages: false
       package-name: version-from-git
+      project-type: legacy
       skip-integration-test: true
       switch: ${{ matrix.switch }}
