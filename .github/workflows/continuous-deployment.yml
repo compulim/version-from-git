@@ -11,6 +11,7 @@ on:
 jobs:
   call-workflow:
     permissions:
+      attestations: write
       contents: write
       id-token: write
       pages: write
