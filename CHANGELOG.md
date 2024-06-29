@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- Bumped dependencies, in PR [#23](https://github.com/compulim/version-from-git/pull/23)
+   - Production dependencies
+      - [`chalk@5.3.0`](https://npmjs.com/package/chalk/v/5.3.0)
+      - [`commander@12.1.0`](https://npmjs.com/package/commander/v/12.1.0)
+      - [`cross-spawn@7.0.3`](https://npmjs.com/package/cross-spawn/v/7.0.3)
+      - [`on-error-resume-next@2.0.1`](https://npmjs.com/package/on-error-resume-next/v/2.0.1)
+      - [`semver@7.6.2`](https://npmjs.com/package/semver/v/7.6.2)
+
 ## [1.1.2] - 2024-05-24
 
 ### Fixed
