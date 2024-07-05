@@ -3,15 +3,14 @@
   "version": "0.0.0-0",
   "description": "Bump package.json version to pre-release tagged with Git branch and short commit hash, 1.0.0-main.1a2b3c4",
   "files": [
-    "./src/**/*.cjs",
-    "./src/**/*.js",
-    "./src/**/*.mjs"
+    "./dist/"
   ],
-  "main": "./src/index.js",
+  "main": "./dist/version-from-git.mjs",
   "bin": {
-    "version-from-git": "./src/index.js"
+    "version-from-git": "./dist/version-from-git.mjs"
   },
   "scripts": {
+    "build": "tsup-node",
     "bump": "npm run bump:prod && npm run bump:dev && npm run bump:auditfix",
     "bump:auditfix": "npm audit fix || exit 0",
     "bump:dev": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.localPeerDependencies // {}) as $L | (.devDependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@latest\") | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
@@ -49,9 +48,14 @@
     "cross-spawn": "^7.0.3",
     "git-rev-sync": "^3.0.2",
     "on-error-resume-next": "^2.0.1",
-    "semver": "^7.6.2"
+    "read-pkg": "^9.0.1",
+    "semver": "^7.6.2",
+    "tsup": "^8.1.0"
   },
   "devDependencies": {
-    "@tsconfig/strictest": "^2.0.5"
+    "@tsconfig/strictest": "^2.0.5",
+    "@types/cross-spawn": "^6.0.6",
+    "@types/git-rev-sync": "^2.0.2",
+    "@types/semver": "^7.5.8"
   }
 }

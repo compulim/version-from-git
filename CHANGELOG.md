@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
+- Ported to TypeScript, in PR [#24](https://github.com/compulim/version-from-git/pull/24)
 - Bumped dependencies, in PR [#23](https://github.com/compulim/version-from-git/pull/23)
    - Production dependencies
       - [`chalk@5.3.0`](https://npmjs.com/package/chalk/v/5.3.0)
