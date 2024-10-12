@@ -1,11 +1,23 @@
 {
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "esModuleInterop": true,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "jsx": "react",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "noEmit": true,
-    "strict": true
+    "strict": true,
+    "target": "ESNext",
+    "types": [
+      "node"
+    ]
   },
-  "exclude": ["**/*.spec.ts", "**/*.spec.tsx", "**/*.test.ts", "**/*.test.tsx", "__tests__/**/*"],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "__tests__/**/*"
+  ],
   "extends": "@tsconfig/strictest/tsconfig.json"
 }

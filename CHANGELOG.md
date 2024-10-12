@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
       - [`cross-spawn@7.0.3`](https://npmjs.com/package/cross-spawn/v/7.0.3)
       - [`on-error-resume-next@2.0.1`](https://npmjs.com/package/on-error-resume-next/v/2.0.1)
       - [`semver@7.6.2`](https://npmjs.com/package/semver/v/7.6.2)
+- Added [ESLint import/export syntax](https://npmjs.com/package/eslint-plugin-import), in PR [#26](https://github.com/compulim/version-from-git/pull/26)
+- Added [`publint`](https://npmjs.com/package/publint), in PR [#26](https://github.com/compulim/version-from-git/pull/26)
 
 ## [1.1.2] - 2024-05-24
 
