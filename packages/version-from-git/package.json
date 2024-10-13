@@ -5,9 +5,10 @@
   "files": [
     "./dist/"
   ],
+  "type": "module",
   "main": "./dist/version-from-git.js",
   "bin": {
-    "version-from-git": "./dist/version-from-git.mjs"
+    "version-from-git": "./dist/version-from-git.js"
   },
   "scripts": {
     "build": "tsup",
