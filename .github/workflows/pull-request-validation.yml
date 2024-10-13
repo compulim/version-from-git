@@ -12,6 +12,8 @@ jobs:
         switch: [current]
     uses: compulim/workflows/.github/workflows/pull-request-validation.yml@main
     with:
+      github-pages: false
       package-name: version-from-git
-      skip-integration-test: false
+      project-type: legacy
+      skip-integration-test: true
       switch: ${{ matrix.switch }}

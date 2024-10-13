@@ -18,4 +18,6 @@ jobs:
     secrets: inherit
     uses: compulim/workflows/.github/workflows/continuous-deployment.yml@main
     with:
+      github-pages: false
+      node-version: 18.x
       package-name: version-from-git
