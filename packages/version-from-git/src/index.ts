@@ -59,7 +59,7 @@ try {
   branch = branch || gitBranch(cwd);
   long = gitLong(cwd);
   short = gitShort(cwd);
-} catch (err) {
+} catch {
   log(red('Failed to read from .git directory, is this a Git branch with at least one commit?'));
   process.exit(-1);
 }
