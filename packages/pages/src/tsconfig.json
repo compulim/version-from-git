@@ -3,19 +3,16 @@
     "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "module": "ESNext",
+    "lib": [
+      "DOM",
+      "ESNext",
+      "WebWorker"
+    ],
     "moduleResolution": "Bundler",
     "noEmit": true,
     "strict": true,
     "target": "ESNext",
     "types": []
   },
-  "exclude": [
-    "**/*.spec.ts",
-    "**/*.spec.tsx",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "__tests__/**/*"
-  ],
   "extends": "./tsconfig.custom.json"
 }

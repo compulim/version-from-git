@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
+- 💢 Moved to ESM only, in PR [#27](https://github.com/compulim/version-from-git/pull/27)
 - Ported to TypeScript, in PR [#24](https://github.com/compulim/version-from-git/pull/24)
 - Bumped dependencies, in PR [#23](https://github.com/compulim/version-from-git/pull/23)
    - Production dependencies

@@ -12,6 +12,7 @@ import { major, minor, patch } from 'semver';
 
 const { green, magenta, red, yellow } = chalk;
 const { log } = console;
+
 const ourPackageJSON = await readPackage({ cwd: join(fileURLToPath(import.meta.url), '../../') });
 
 const DEFAULT_TEMPLATE = 'branch.short';
