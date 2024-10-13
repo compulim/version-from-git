@@ -5,24 +5,23 @@
   "files": [
     "./dist/"
   ],
-  "main": "./dist/version-from-git.mjs",
+  "main": "./dist/version-from-git.js",
   "bin": {
     "version-from-git": "./dist/version-from-git.mjs"
   },
   "scripts": {
-    "build": "tsup-node",
-    "bump": "npm run bump:prod && npm run bump:dev && npm run bump:auditfix",
-    "bump:auditfix": "npm audit fix || exit 0",
-    "bump:dev": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.localPeerDependencies // {}) as $L | (.devDependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@latest\") | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
-    "bump:prod": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.localPeerDependencies // {}) as $L | (.dependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@latest\") | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
-    "precommit": "npm run precommit:eslint && npm run precommit:publint && npm run precommit:typescript:production",
-    "precommit:eslint": "eslint ./src/",
+    "build": "tsup",
+    "bump": "npm run bump:prod && npm run bump:dev",
+    "bump:dev": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.pinDependencies // {}) as $P | (.localPeerDependencies // {}) as $L | (.devDependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@\" + ($P[.key] // [\"latest\"])[0]) | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
+    "bump:prod": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.pinDependencies // {}) as $P | (.localPeerDependencies // {}) as $L | (.dependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@\" + ($P[.key] // [\"latest\"])[0]) | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
+    "precommit": "npm run precommit:eslint && npm run precommit:publint && npm run precommit:typescript:production && npm run precommit:typescript:test",
+    "precommit:eslint": "ESLINT_USE_FLAT_CONFIG=false eslint ./src/",
     "precommit:publint": "publint",
     "precommit:typescript:production": "tsc --noEmit --project ./src/tsconfig.precommit.production.json",
-    "-precommit:typescript:test": "tsc --noEmit --project ./src/tsconfig.precommit.test.json",
+    "precommit:typescript:test": "tsc --noEmit --project ./src/tsconfig.precommit.test.json",
     "prepack": "cp ../../CHANGELOG.md . && cp ../../LICENSE . && cp ../../README.md .",
     "switch": "cat package.json | jq --arg SWITCH_NAME $SWITCH_NAME -r '(.[\"switch:\" + $SWITCH_NAME] // {}) as $TEMPLATE | .devDependencies += ($TEMPLATE.devDependencies // {}) | .dependencies += ($TEMPLATE.dependencies // {})' | tee ./package.json.tmp && mv ./package.json.tmp ./package.json",
-    "test": "echo \"TODO: Add tests\""
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -60,5 +59,18 @@
     "@types/git-rev-sync": "^2.0.2",
     "@types/semver": "^7.5.8",
     "publint": "^0.2.11"
-  }
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/version-from-git.d.mts",
+        "default": "./dist/version-from-git.mjs"
+      },
+      "require": {
+        "types": "./dist/version-from-git.d.ts",
+        "default": "./dist/version-from-git.js"
+      }
+    }
+  },
+  "typings": "./dist/version-from-git.d.ts"
 }

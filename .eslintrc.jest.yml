@@ -8,3 +8,4 @@ rules:
   react/display-name: off
   # Disable for convenience
   react/prop-types: off
+  '@typescript-eslint/no-require-imports': off

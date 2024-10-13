@@ -2,10 +2,11 @@ import { defineConfig } from 'tsup';
 
 export default defineConfig([
   {
+    dts: true,
     entry: {
-      'version-from-git': './src/index.mts'
+      'version-from-git': './src/index.ts'
     },
-    format: ['esm'],
+    format: ['cjs', 'esm'],
     sourcemap: true
   }
 ]);

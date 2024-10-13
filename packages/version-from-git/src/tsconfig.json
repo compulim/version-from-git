@@ -14,5 +14,5 @@
       "node"
     ]
   },
-  "extends": "@tsconfig/strictest/tsconfig.json"
+  "extends": "./tsconfig.custom.json"
 }

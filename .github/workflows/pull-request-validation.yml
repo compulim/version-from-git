@@ -9,11 +9,9 @@ jobs:
   call-workflow:
     strategy:
       matrix:
-        switch: [current]
+        switch: [current, react-16, react-17, react-18]
     uses: compulim/workflows/.github/workflows/pull-request-validation.yml@main
     with:
-      github-pages: false
       package-name: version-from-git
-      project-type: legacy
-      skip-integration-test: true
+      skip-integration-test: false
       switch: ${{ matrix.switch }}
