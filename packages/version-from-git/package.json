@@ -50,8 +50,8 @@
     "git-rev-sync": "^3.0.2",
     "on-error-resume-next": "^2.0.1",
     "read-pkg": "^9.0.1",
-    "semver": "^7.6.2",
-    "tsup": "^8.1.0"
+    "semver": "^7.6.3",
+    "tsup": "^8.3.0"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.7",
