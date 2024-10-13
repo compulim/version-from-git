@@ -11,7 +11,7 @@
     "version-from-git": "./dist/version-from-git.js"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup-node",
     "bump": "npm run bump:prod && npm run bump:dev",
     "bump:dev": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.pinDependencies // {}) as $P | (.localPeerDependencies // {}) as $L | (.devDependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@\" + ($P[.key] // [\"latest\"])[0]) | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
     "bump:prod": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.pinDependencies // {}) as $P | (.localPeerDependencies // {}) as $L | (.dependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@\" + ($P[.key] // [\"latest\"])[0]) | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
@@ -59,18 +59,5 @@
     "@types/git-rev-sync": "^2.0.2",
     "@types/semver": "^7.5.8",
     "publint": "^0.2.11"
-  },
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./dist/version-from-git.d.mts",
-        "default": "./dist/version-from-git.mjs"
-      },
-      "require": {
-        "types": "./dist/version-from-git.d.ts",
-        "default": "./dist/version-from-git.js"
-      }
-    }
-  },
-  "typings": "./dist/version-from-git.d.ts"
+  }
 }
