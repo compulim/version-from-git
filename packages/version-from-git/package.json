@@ -3,10 +3,12 @@
   "version": "0.0.0-0",
   "description": "Bump package.json version to pre-release tagged with Git branch and short commit hash, 1.0.0-main.1a2b3c4",
   "files": [
+    "./*.js",
     "./dist/"
   ],
   "type": "module",
   "main": "./dist/version-from-git.js",
+  "typings": "./dist/version-from-git.d.ts",
   "bin": {
     "version-from-git": "./dist/version-from-git.js"
   },
@@ -15,14 +17,15 @@
     "bump": "npm run bump:prod && npm run bump:dev",
     "bump:dev": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.pinDependencies // {}) as $P | (.localPeerDependencies // {}) as $L | (.devDependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@\" + ($P[.key] // [\"latest\"])[0]) | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
     "bump:prod": "PACKAGES_TO_BUMP=$(cat package.json | jq -r '(.pinDependencies // {}) as $P | (.localPeerDependencies // {}) as $L | (.dependencies // {}) | to_entries | map(select(.key as $K | $L | has($K) | not)) | map(.key + \"@\" + ($P[.key] // [\"latest\"])[0]) | join(\" \")') && [ ! -z \"$PACKAGES_TO_BUMP\" ] && npm install $PACKAGES_TO_BUMP || true",
-    "precommit": "npm run precommit:eslint && npm run precommit:publint && npm run precommit:typescript:production",
+    "precommit": "npm run precommit:eslint && npm run precommit:publint && npm run precommit:typescript:production && npm run precommit:typescript:test",
     "precommit:eslint": "ESLINT_USE_FLAT_CONFIG=false eslint ./src/",
     "precommit:publint": "publint",
     "precommit:typescript:production": "tsc --noEmit --project ./src/tsconfig.precommit.production.json",
-    "-precommit:typescript:test": "tsc --noEmit --project ./src/tsconfig.precommit.test.json",
+    "precommit:typescript:test": "tsc --noEmit --project ./src/tsconfig.precommit.test.json",
     "prepack": "cp ../../CHANGELOG.md . && cp ../../LICENSE . && cp ../../README.md .",
+    "start": "npm run build -- --onSuccess \"touch ../pages/package.json\" --watch",
     "switch": "cat package.json | jq --arg SWITCH_NAME $SWITCH_NAME -r '(.[\"switch:\" + $SWITCH_NAME] // {}) as $TEMPLATE | .devDependencies += ($TEMPLATE.devDependencies // {}) | .dependencies += ($TEMPLATE.dependencies // {})' | tee ./package.json.tmp && mv ./package.json.tmp ./package.json",
-    "test": "echo \"TODO: Add tests\""
+    "test": "node --test ${CI:---watch} **/*.{spec,test}.{[jt]s,[jt]sx,c[jt]s,m[jt]s}"
   },
   "repository": {
     "type": "git",

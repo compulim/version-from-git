@@ -1,4 +1,5 @@
 {
+  "testEnvironment": "@happy-dom/jest-environment",
   "testPathIgnorePatterns": [
     "/__setup__/",
     "/lib/",
@@ -10,7 +11,7 @@
     "/__tests__/types/": [
       "<rootDir>/__tests__/__setup__/typingTestTransformer.js"
     ],
-    "\\.[jt]sx?$": [
+    "\\.m?[jt]sx?$": [
       "babel-jest",
       {
         "presets": [
@@ -25,7 +26,7 @@
             {
               "modules": "commonjs",
               "targets": {
-                "node": "18"
+                "node": "20"
               }
             }
           ]
