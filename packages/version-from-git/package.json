@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/compulim/version-from-git.git"
+    "url": "https://github.com/compulim/version-from-git.git"
   },
   "keywords": [
     "branch",
