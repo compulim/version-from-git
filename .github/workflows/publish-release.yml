@@ -10,8 +10,10 @@ jobs:
       contents: write
       pages: write
       id-token: write
-    secrets: inherit
-    uses: compulim/workflows/.github/workflows/publish-release.yml@main
+    secrets:
+      WORKFLOW_BOT_APP_ID: ${{ secrets.WORKFLOW_BOT_APP_ID }}
+      WORKFLOW_BOT_PRIVATE_KEY: ${{ secrets.WORKFLOW_BOT_PRIVATE_KEY }}
+    uses: compulim/workflows/.github/workflows/publish-release-oidc.yml@main
     with:
-      package-name: version-from-git
+      package-name: 'version-from-git'
       tag: ${{ github.ref_name }}

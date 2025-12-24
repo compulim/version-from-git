@@ -15,9 +15,9 @@ jobs:
       contents: write
       id-token: write
       pages: write
-    secrets: inherit
-    uses: compulim/workflows/.github/workflows/continuous-deployment.yml@main
+    secrets:
+      WORKFLOW_BOT_APP_ID: ${{ secrets.WORKFLOW_BOT_APP_ID }}
+      WORKFLOW_BOT_PRIVATE_KEY: ${{ secrets.WORKFLOW_BOT_PRIVATE_KEY }}
+    uses: compulim/workflows/.github/workflows/continuous-deployment-oidc.yml@main
     with:
-      github-pages: false
-      node-version: 18.x
-      package-name: version-from-git
+      package-name: 'version-from-git'

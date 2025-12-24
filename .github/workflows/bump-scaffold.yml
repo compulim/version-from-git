@@ -1,10 +1,10 @@
-name: Bump scaffold
+name: 🧼 Bump scaffold
 
 on:
   workflow_dispatch:
     inputs:
       package-name:
-        default: version-from-git
+        default: 'version-from-git'
         description: Name of the package
         required: true
         type: string
@@ -14,7 +14,7 @@ on:
         required: true
         type: boolean
       skip-integration-test:
-        default: false
+        default: true
         description: Skip integration test
         required: true
         type: boolean

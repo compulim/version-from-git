@@ -6,7 +6,8 @@ export default defineConfig([
     entry: {
       'version-from-git': './src/index.ts'
     },
-    format: 'esm',
-    sourcemap: true
+    format: ['cjs', 'esm'],
+    sourcemap: true,
+    target: 'esnext'
   }
 ]);
