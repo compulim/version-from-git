@@ -14,10 +14,5 @@ export default defineConfig([
     ...baseConfig,
     format: ['esm'],
     target: 'esnext'
-  }),
-  overrideConfig({
-    ...baseConfig,
-    format: ['cjs'],
-    target: 'es2019' // For compatibility with Webpack 4.
   })
 ]);
