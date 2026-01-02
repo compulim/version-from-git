@@ -37,6 +37,7 @@
       "18"
     ]
   },
+  "peerDependencies": {},
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.8",
     "@types/react": "^18.3.27",
@@ -48,8 +49,5 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "version-from-git": "0.0.0-0"
-  },
-  "main": "index.js",
-  "exports": {},
-  "peerDependencies": {}
+  }
 }

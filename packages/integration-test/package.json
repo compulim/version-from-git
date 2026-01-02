@@ -2,8 +2,7 @@
   "name": "@compulim/integration-test",
   "version": "0.0.0-0",
   "description": "",
-  "main": "index.js",
-  "devDependencies": {},
+  "private": true,
   "scripts": {
     "build": "npm run build:copy && npm run build:custom --if-present",
     "build:copy": "mkdir -p ./webDriver/static/; SRC=$(node --eval=\"console.log(require('path').resolve(require('resolve-cwd')('version-from-git'), '../../dist'))\"); DEST=$(realpath ./webDriver/static); rm -rf $DEST; mkdir -p $DEST/js/; cp $SRC/** $DEST/js/",
@@ -22,21 +21,20 @@
     "test:types": "node --experimental-strip-types --import @compulim/test-harness/test-types.import --test **/*.test-types.ts",
     "test:unit": "node --experimental-strip-types --experimental-test-coverage --experimental-test-isolation=none --test"
   },
-  "author": "",
+  "author": "William Wong (https://github.com/compulim)",
   "license": "MIT",
-  "private": true,
   "files": [
     "**/*.cjs",
     "**/*.js",
     "**/*.mjs",
     "webDriver/**/*"
   ],
+  "pinDependencies": {},
   "localPeerDependencies": {
     "@compulim/test-harness": "0.0.0-0",
     "version-from-git": "0.0.0-0"
   },
-  "dependencies": {},
-  "exports": {},
-  "pinDependencies": {},
-  "peerDependencies": {}
+  "peerDependencies": {},
+  "devDependencies": {},
+  "dependencies": {}
 }

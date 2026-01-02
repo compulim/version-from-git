@@ -32,11 +32,10 @@
     "precommit:typescript": "tsc --noEmit --project ./src/tsconfig.precommit.json",
     "switch": "cat package.json | jq --arg SWITCH_NAME $SWITCH_NAME -r '(.[\"switch:\" + $SWITCH_NAME] // {}) as $TEMPLATE | .devDependencies += ($TEMPLATE.devDependencies // {}) | .dependencies += ($TEMPLATE.dependencies // {})' | tee ./package.json.tmp && mv ./package.json.tmp ./package.json"
   },
+  "author": "William Wong (https://github.com/compulim)",
+  "license": "MIT",
   "peerDependencies": {
     "typescript": ">=5"
   },
-  "main": "index.js",
-  "devDependencies": {},
-  "author": "William Wong (https://github.com/compulim)",
-  "license": "MIT"
+  "devDependencies": {}
 }
