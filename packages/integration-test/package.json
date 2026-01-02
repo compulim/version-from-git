@@ -34,7 +34,7 @@
     "@compulim/test-harness": "0.0.0-0",
     "version-from-git": "0.0.0-0"
   },
-  "peerDependencies": {},
-  "devDependencies": {},
-  "dependencies": {}
+  "devDependencies": {
+    "resolve-cwd": "^3.0.0"
+  }
 }
