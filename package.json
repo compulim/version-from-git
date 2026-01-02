@@ -29,6 +29,9 @@
     "switch:react-18": "SWITCH_NAME=react-18 npm run switch:_",
     "test": "npm run test --if-present --workspaces"
   },
+  "pinDependencies": {},
+  "localPeerDependencies": {},
+  "peerDependencies": {},
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.50.1",
     "@typescript-eslint/parser": "^8.50.1",
@@ -41,9 +44,5 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "prettier": "^3.7.4"
   },
-  "dependencies": {},
-  "exports": {},
-  "localPeerDependencies": {},
-  "pinDependencies": {},
-  "peerDependencies": {}
+  "dependencies": {}
 }
